@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { TrendingUp } from "lucide-react";
-import { RARITY_CONFIG } from "@/components/space/DiscoveryLog";
+import { RARITY_CONFIG } from "./components/space/DiscoveryLog";
 
 const RARITY_ORDER = ["common", "uncommon", "rare", "epic", "legendary", "star"];
 const RARITY_COLORS = {
