@@ -1,0 +1,47 @@
+{
+  "name": "Planet",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Planet Name",
+      "description": "Auto-generated celestial body name"
+    },
+    "rarity": {
+      "type": "string",
+      "title": "Rarity",
+      "description": "common, uncommon, rare, epic, legendary, or star",
+      "enum": [
+        "common",
+        "uncommon",
+        "rare",
+        "epic",
+        "legendary",
+        "star"
+      ],
+      "default": "common"
+    },
+    "launch_date": {
+      "type": "string",
+      "title": "Launch Date",
+      "description": "YYYY-MM-DD date of the launch"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

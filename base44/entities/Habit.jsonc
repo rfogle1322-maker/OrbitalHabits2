@@ -1,0 +1,50 @@
+{
+  "name": "Habit",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title",
+      "description": "The habit name"
+    },
+    "completed": {
+      "type": "boolean",
+      "title": "Completed",
+      "default": false
+    },
+    "streak": {
+      "type": "integer",
+      "title": "Streak",
+      "description": "Current consecutive days completed",
+      "default": 0
+    },
+    "best_streak": {
+      "type": "integer",
+      "title": "Best Streak",
+      "description": "Highest streak ever reached",
+      "default": 0
+    },
+    "last_completed_date": {
+      "type": "string",
+      "title": "Last Completed Date",
+      "description": "YYYY-MM-DD of last completion"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}
