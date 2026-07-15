@@ -2,16 +2,16 @@ const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me
 
 import React, { useEffect, useState, useCallback } from "react";
 
-import FuelMeter from "@/components/space/FuelMeter";
-import LaunchStatus from "@/components/space/LaunchStatus";
-import HabitList from "@/components/space/HabitList";
-import DiscoveryLog from "@/components/space/DiscoveryLog";
-import Starfield from "@/components/space/Starfield";
-import StreakTimer from "@/components/space/StreakTimer";
-import Achievements from "@/components/space/Achievements";
-import DiscoveryReveal from "@/components/space/DiscoveryReveal";
-import LaunchHistory from "@/components/space/LaunchHistory";
-import DailyReminder from "@/components/space/DailyReminder";
+import FuelMeter from "../components/space/FuelMeter";
+import LaunchStatus from "../components/space/LaunchStatus";
+import HabitList from "../components/space/HabitList";
+import DiscoveryLog from "../components/space/DiscoveryLog";
+import Starfield from "../components/space/Starfield";
+import StreakTimer from "../components/space/StreakTimer";
+import Achievements from "../components/space/Achievements";
+import DiscoveryReveal from "../components/space/DiscoveryReveal";
+import LaunchHistory from "../components/space/LaunchHistory";
+import DailyReminder from "../components/space/DailyReminder";
 import { Rocket } from "lucide-react";
 import moment from "moment";
 
