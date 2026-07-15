@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Globe, Star, Sparkles, Zap, Diamond } from "lucide-react";
-import { RARITY_CONFIG } from "@/components/space/DiscoveryLog";
+import { RARITY_CONFIG } from "./components/space/DiscoveryLog";
 
 const RARITY_FANFARE = {
   common:    { particles: 8,  particleColor: "#94a3b8", title: "Planet Discovered",   subtitle: "A new world added to your atlas." },
