@@ -35,7 +35,7 @@ export default function HabitList({ habits, onAdd, onDelete, onToggle }) {
 
   const activeCat = CATEGORIES.find((c) => c.label === activeCategory);
   const filtered = SUGGESTED_HABITS.filter(activeCat.filter);
-  const addedTitles = new Set(habits.map((h) => h.title.toLowerCase()));
+  const addedTitles = new Set(habits.map((h) => h?.title?.toLowerCase()| | ""));
 
   return (
     <div className="rounded-2xl border border-indigo-500/30 bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6 shadow-[0_0_30px_rgba(99,102,241,0.15)]">
