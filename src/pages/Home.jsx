@@ -231,7 +231,7 @@ export default function Home() {
           <HabitList
             habits={habits}
             onAdd={handleAdd}
-            onToggle={handleToggle}
+            <HabitList habits={habits} onToggle={toggleHabit} />
             onDelete={handleDelete}
           />
         </div>
