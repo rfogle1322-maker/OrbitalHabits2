@@ -163,6 +163,14 @@ export default function Home() {
     await db.entities.Habit.delete(habit.id);
     setHabits((prev) => prev.filter((h) => h.id !== habit.id));
   };
+  const handleToggle = async (habit) => {
+    const updatedHabit = { ...habit, completed: !habit.completed };
+    await db.entities.Habit.update({
+      id: habit.id,
+      completed: updatedHabit.completed
+    });
+    setHabits((prev) => prev.map((h) => h.id === habit.id ? updatedHabit : h));
+  };
 
   const handleLaunch = async () => {
     if (!canLaunch || launching) return;
