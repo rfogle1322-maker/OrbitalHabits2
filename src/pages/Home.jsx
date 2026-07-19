@@ -138,9 +138,9 @@ export default function Home() {
     setHabits((prev) => [...prev, created]);
   };
 
-  const handleToggle = async (habit) => {
+   const handleToggle = async (habit) => {
     const today = moment().format("YYYY-MM-DD");
-    const yesterday = moment().subtract(1, "day").format("YYYY-MM-DD");
+    const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
     let newStreak = habit.streak || 0;
     let newLastDate = habit.last_completed_date || null;
 
@@ -150,14 +150,25 @@ export default function Home() {
     }
 
     const newBestStreak = Math.max(habit.best_streak || 0, newStreak);
-    const updated = await db.entities.Habit.update(habit.id, {
+
+    const updatedHabit = {
+      ...habit,
       completed: !habit.completed,
       streak: newStreak,
       last_completed_date: newLastDate,
-      best_streak: newBestStreak,
+      best_streak: newBestStreak
+    };
+
+    await db.entities.Habit.update(habit.id, {
+      completed: updatedHabit.completed,
+      streak: updatedHabit.streak,
+      last_completed_date: updatedHabit.last_completed_date,
+      best_streak: updatedHabit.best_streak
     });
-    setHabits((prev) => prev.map((h) => (h.id === habit.id ? updated : h)));
+
+    setHabits((prev) => prev.map((h) => h.id === habit.id ? updatedHabit : h));
   };
+
 
   const handleDelete = async (habit) => {
     await db.entities.Habit.delete(habit.id);
