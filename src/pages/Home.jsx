@@ -138,7 +138,7 @@ export default function Home() {
     setHabits((prev) => [...prev, created]);
   };
 
-   const handleToggle = async (habit) => {
+     const handleToggle = async (habit) => {
     const today = moment().format("YYYY-MM-DD");
     const yesterday = moment().subtract(1, "days").format("YYYY-MM-DD");
     let newStreak = habit.streak || 0;
@@ -159,17 +159,11 @@ export default function Home() {
       best_streak: newBestStreak
     };
 
-    await db.entities.Habit.update(habit.id, {
-      completed: updatedHabit.completed,
-      streak: updatedHabit.streak,
-      last_completed_date: updatedHabit.last_completed_date,
-      best_streak: updatedHabit.best_streak
-    });
+    await db.entities.Habit.update(habit.id, updatedHabit);
 
-   setHabits((prev) => prev.map((h) => h.id === habit.id ? { ...h, ...updatedHabit } : h));
-
-
+    setHabits((prev) => prev.map((h) => (h.id === habit.id ? updatedHabit : h)));
   };
+
 
 
   const handleDelete = async (habit) => {
@@ -187,14 +181,18 @@ export default function Home() {
       setPlanets((prev) => [planet, ...prev]);
       setRevealPlanet(planet);
       setLaunchedToday(true);
-      // Reset all habits to uncompleted
-      const updates = habits.map((h) => ({ id: h.id, completed: false }));
-      await db.entities.Habit.bulkUpdate(updates);
-      setHabits((prev) => prev.map((h) => ({ ...h, completed: false })));
+
+      // Reset completed status while keeping all other fields (title, streak, etc.) safe
+      const updates = habits.map((h) => ({ ...h, completed: false }));
+      await Promise.all(updates.map((u) => db.entities.Habit.update(u.id, u)));
+      setHabits(updates);
+    } catch (err) {
+      console.error("Launch error:", err);
     } finally {
       setLaunching(false);
     }
   };
+
 
   if (loading) {
     return (
