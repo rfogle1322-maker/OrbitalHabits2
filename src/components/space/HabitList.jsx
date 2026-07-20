@@ -151,7 +151,8 @@ export default function HabitList({ habits, onAdd, onDelete, onToggle }) {
                     : "text-slate-200"
                 }`}
               >
-                {habit.title}
+                {habit.title || habit.name || habit.text || "New Habit"}
+
               </button>
               {habit.streak > 0 && (
                 <div className="flex items-center gap-1 text-orange-400 text-xs font-mono shrink-0">
