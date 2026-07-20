@@ -135,8 +135,13 @@ export default function Home() {
 
   const handleAdd = async (title) => {
     const created = await db.entities.Habit.create({ title, completed: false });
-    setHabits((prev) => [...prev, created]);
+    const safeHabit = {
+      ...created,
+      title: created?.title || created?.name || created?.text || title
+    };
+    setHabits((prev) => [...prev, safeHabit]);
   };
+
 
      const handleToggle = async (habit) => {
     const today = moment().format("YYYY-MM-DD");
