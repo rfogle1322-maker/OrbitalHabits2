@@ -181,13 +181,24 @@ export default function Home() {
     setLaunching(true);
     const today = moment().format("YYYY-MM-DD");
     try {
-      const { name, rarity } = generateCelestialBody();
-      const planet = await db.entities.Planet.create({ name, rarity, launch_date: today });
-      setPlanets((prev) => [planet, ...prev]);
-      setRevealPlanet(planet);
+      const generated = generateCelestialBody();
+      const createdPlanet = await db.entities.Planet.create({ 
+        name: generated.name, 
+        rarity: generated.rarity, 
+        launch_date: today 
+      });
+
+      // Preserve generated name & rarity if DB drops them
+      const safePlanet = {
+        ...createdPlanet,
+        name: createdPlanet?.name || generated.name,
+        rarity: createdPlanet?.rarity || generated.rarity
+      };
+
+      setPlanets((prev) => [safePlanet, ...prev]);
+      setRevealPlanet(safePlanet);
       setLaunchedToday(true);
 
-      // Reset completed status while keeping all other fields (title, streak, etc.) safe
       const updates = habits.map((h) => ({ ...h, completed: false }));
       await Promise.all(updates.map((u) => db.entities.Habit.update(u.id, u)));
       setHabits(updates);
@@ -197,6 +208,7 @@ export default function Home() {
       setLaunching(false);
     }
   };
+
 
 
   if (loading) {
