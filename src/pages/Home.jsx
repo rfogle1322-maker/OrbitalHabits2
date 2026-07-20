@@ -166,7 +166,8 @@ export default function Home() {
       best_streak: updatedHabit.best_streak
     });
 
-    setHabits((prev) => prev.map((h) => h.id === habit.id ? { ...h, ...updatedHabit } : h));
+   setHabits((prev) => prev.map((h) => h.id === habit.id ? { ...h, ...updatedHabit } : h));
+
 
   };
 
