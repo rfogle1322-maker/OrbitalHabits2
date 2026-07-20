@@ -37,7 +37,7 @@ export default function DiscoveryReveal({ planet, onClose }) {
 
   if (!planet) return null;
 
-  const rarity = planet.rarity || "common";
+  const rarity = (planet?.rarity || "common").toLowerCase();
   const cfg = RARITY_CONFIG[rarity] || RARITY_CONFIG.common;
   const fanfare = RARITY_FANFARE[rarity] || RARITY_FANFARE.common;
   const Icon = cfg.icon;
